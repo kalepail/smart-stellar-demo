@@ -1,3 +1,4 @@
+import {rpc} from "@stellar/stellar-sdk";
 
 
 interface ImportMetaEnv {
@@ -14,3 +15,5 @@ interface ImportMetaEnv {
 interface ImportMeta {
     readonly env: ImportMetaEnv;
 }
+
+

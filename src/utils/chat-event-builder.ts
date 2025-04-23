@@ -14,7 +14,7 @@ export class ChatEventBuilder {
      * @throws Error if the address type is unknown or invalid
      */
     getAddressFromXdr (event: Api.EventResponse): string {
-        let address = Address.fromScVal (event.topic[0]);
+        let address: Address = Address.fromScVal (event.topic[0]);
         switch (address.toScAddress ().switch ()) {
             case xdr.ScAddressType.scAddressTypeAccount ():
                 return StellarSdk.StrKey.encodeEd25519PublicKey (address.toBuffer ());
@@ -81,8 +81,8 @@ export class ChatEventBuilder {
         return this;
     }
 
-    public build (): ChatEvent {
-        return this.event as ChatEvent;
+    public build (): Readonly<Required<ChatEvent>> {
+        return this.event as Readonly<Required<ChatEvent>>;
     }
 }
 

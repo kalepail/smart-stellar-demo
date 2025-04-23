@@ -29,7 +29,7 @@ export class LocalRpcServer {
     constructor (contractIdString?: string , startLedger?: number) {
         //@ts-ignore
         this.instance = new RpcServer (import.meta.env.PUBLIC_RPC_URL , import.meta.env.PUBLIC_NETWORK_PASSPHRASE);
-        this._contractId = contractIdString || import.meta.env.PUBLIC_CHAT_CONTRACT_ID;
+        this._contractId = import.meta.env.PUBLIC_CHAT_CONTRACT_ID;
         this.eventFilters = [
             {
                 type: "contract" ,
@@ -40,6 +40,9 @@ export class LocalRpcServer {
         this.contractDataIsDefined = this.contractDataIsDefined.bind (this);
         this.successfulRequestEventHandler = this.successfulRequestEventHandler.bind (this);
         this.getOnError = this.getOnError.bind (this);
+
+        console.log (`Contract ID: ${this._contractId}`);
+        console.log(import.meta.env.PUBLIC_CHAT_CONTRACT_ID);
     }
 
     /**
@@ -53,16 +56,15 @@ export class LocalRpcServer {
     }
 
     /**
-     * Validates that all required fields are present in an `Api.EventResponse`.
+     * Predicate filter that Validates that all required fields are present
+     * in an `Api.EventResponse`.
      *
      * @param eventResponse - The event response to validate
      * @returns True if all required fields (contractId, id, value) are defined
      */
-    contractDataIsDefined (eventResponse: Api.EventResponse) {
-        return eventResponse.contractId !== undefined && eventResponse.contractId !== null
-               && eventResponse.id !== undefined && eventResponse.id !== null &&
-               eventResponse.value !== undefined && eventResponse.value !== null;
-    }
+    contractDataIsDefined = (eventResponse: Api.EventResponse) => eventResponse.contractId !== undefined && eventResponse.contractId !== null
+                                                                  && eventResponse.id !== undefined && eventResponse.id !== null &&
+                                                                  eventResponse.value !== undefined && eventResponse.value !== null;
 
     private getOnError (reason: any): ChatEvent[] {
         console.error (reason);
@@ -84,13 +86,24 @@ export class LocalRpcServer {
         const events: Api.EventResponse[] = eventResponse.events;
         if (events.length === 0) return [];
 
+        console.log(eventResponse);
+        console.log(events);
+
         return events
             .map ((event: Api.EventResponse) => event as Api.EventResponse)
             .filter ((event) => event.type === "contract")
             .filter ((event) => this.contractDataIsDefined (event))
             .filter ((event) => this.deduplicateEventIds (event))
-            .map ((event) =>
-                      this.transformApiResponseToChatEvent (event));
+            .map ((event) => this.transformApiResponseToChatEvent (event))
+            .sort (this.decendingTimestampSort ());
+    }
+
+    decendingTimestampSort (): (a: ChatEvent , b: ChatEvent) => (number) {
+        return (a , b) => {
+            if (a.timestamp < b.timestamp) return - 1;
+            if (a.timestamp > b.timestamp) return 1;
+            return 0;
+        };
     }
 
     private transformApiResponseToChatEvent (event: Api.EventResponse): ChatEvent {
@@ -120,18 +133,38 @@ export class LocalRpcServer {
      * @throws Error if the RPC request fails or returns invalid data
      */
     public async getFilteredEventsForContract (cursor: string): Promise<ChatEvent[]> {
+        let last24HoursOfEventsSequence: number =
+            await this.getLast24HourSequence ();
+
+        console.log (`Last 24 hours of events sequence: ${last24HoursOfEventsSequence}`);
 
         const eventRequest: RpcServer.GetEventsRequest = {
             filters: this.eventFilters ,
-            startLedger: this._startLedger ,
+            startLedger: last24HoursOfEventsSequence ,
             limit: this._limit ,
-            cursor: cursor
         };
 
-        return this.instance
+        console.log(eventRequest);
+
+        console.log(this.instance);
+
+        return await this.instance
                    .getEvents (eventRequest)
                    .then (this.successfulRequestEventHandler)
                    .catch (this.getOnError);
+    }
+
+    /**
+     * Returns sequence number representing the last 24 hours of ledgers and events.
+     *
+     * @returns Promise resolving to sequence number
+     * @throws Error if the RPC request fails or returns invalid data
+     */
+    async getLast24HourSequence (): Promise<number> {
+        let latestLedger: Api.GetLatestLedgerResponse =
+            await this.instance.getLatestLedger ();
+
+        return latestLedger.sequence - 17_280;
     }
 }
 

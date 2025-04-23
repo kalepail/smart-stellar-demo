@@ -1,8 +1,10 @@
 ---
+import ChatEventMsg from "../components/ChatEventMsg.svelte";
 import Welcome from '../components/Welcome.svelte';
 import Layout from '../layouts/Layout.astro';
 ---
 
 <Layout>
 	<Welcome client:only />
+	<ChatEventMsg client:visible />
 </Layout>

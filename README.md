@@ -193,7 +193,7 @@ stellar contract invoke \
     -- \
     send \
     --addr GDCJMCMYNDZ2FV6UMSEYRMUSCX53KCG2AWPBFQ24EA2FFYBCEDMFCBCV \
-    --msg test-msg-to-send
+    --msg new-mesg-test2
 ```
 
 **Example diagnostic event:**
