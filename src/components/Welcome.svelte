@@ -6,7 +6,7 @@
     import { chat } from "../utils/chat";
     import { account, server } from "../utils/passkey-kit";
     import { getMessages } from "../utils/zettablocks";
-    import { getEvents, rpc } from "../utils/localRpcServer.ts";
+    import { getEvents, rpc } from "../utils/local-rpc-server.ts";
 
     let interval: NodeJS.Timeout;
 

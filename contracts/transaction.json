@@ -1,0 +1,1355 @@
+{
+  "jsonrpc": "2.0",
+  "id": 8675309,
+  "result": {
+	"latestLedger": 589728,
+	"latestLedgerCloseTime": "1745356870",
+	"oldestLedger": 468769,
+	"oldestLedgerCloseTime": "1744751383",
+	"status": "SUCCESS",
+	"txHash": "86ad86ba26466e50b764cb7c0dab1082a5e1eec4e1cc82ae2bade7fbeb5d143f",
+	"applicationOrder": 2,
+	"feeBump": false,
+	"envelopeJson": {
+	  "tx": {
+		"tx": {
+		  "source_account": "GDCJMCMYNDZ2FV6UMSEYRMUSCX53KCG2AWPBFQ24EA2FFYBCEDMFCBCV",
+		  "fee": 69048,
+		  "seq_num": 2531144486617091,
+		  "cond": "none",
+		  "memo": "none",
+		  "operations": [
+			{
+			  "source_account": null,
+			  "body": {
+				"invoke_host_function": {
+				  "host_function": {
+					"invoke_contract": {
+					  "contract_address": "CBUMOJAEAPLQUCWVIM6HJH5XKXW5OP7CRVOOYMJYSTZ6GFDNA72O2QW6",
+					  "function_name": "send",
+					  "args": [
+						{
+						  "address": "GDCJMCMYNDZ2FV6UMSEYRMUSCX53KCG2AWPBFQ24EA2FFYBCEDMFCBCV"
+						},
+						{
+						  "string": "test-msg-to-send"
+						}
+					  ]
+					}
+				  },
+				  "auth": [
+					{
+					  "credentials": "source_account",
+					  "root_invocation": {
+						"function": {
+						  "contract_fn": {
+							"contract_address": "CBUMOJAEAPLQUCWVIM6HJH5XKXW5OP7CRVOOYMJYSTZ6GFDNA72O2QW6",
+							"function_name": "send",
+							"args": [
+							  {
+								"address": "GDCJMCMYNDZ2FV6UMSEYRMUSCX53KCG2AWPBFQ24EA2FFYBCEDMFCBCV"
+							  },
+							  {
+								"string": "test-msg-to-send"
+							  }
+							]
+						  }
+						},
+						"sub_invocations": []
+					  }
+					}
+				  ]
+				}
+			  }
+			}
+		  ],
+		  "ext": {
+			"v1": {
+			  "ext": "v0",
+			  "resources": {
+				"footprint": {
+				  "read_only": [
+					{
+					  "contract_data": {
+						"contract": "CBUMOJAEAPLQUCWVIM6HJH5XKXW5OP7CRVOOYMJYSTZ6GFDNA72O2QW6",
+						"key": "ledger_key_contract_instance",
+						"durability": "persistent"
+					  }
+					},
+					{
+					  "contract_code": {
+						"hash": "2265fcfc8907072eceab4492c16b8324559acc44dc60dad5e7015ae6a3d6fe32"
+					  }
+					}
+				  ],
+				  "read_write": []
+				},
+				"instructions": 529618,
+				"read_bytes": 720,
+				"write_bytes": 0
+			  },
+			  "resource_fee": 68948
+			}
+		  }
+		},
+		"signatures": [
+		  {
+			"hint": "2220d851",
+			"signature": "a338fed5162f0112f273a2e3cb7cfd522b40dc25bbcc0d7d5105989f76adb83c61c0ae1d74d6bfadccdc8459d5eeb835e6afbb262279e9044e9e627628d0cf05"
+		  }
+		]
+	  }
+	},
+	"resultJson": {
+	  "fee_charged": 30218,
+	  "result": {
+		"tx_success": [
+		  {
+			"op_inner": {
+			  "invoke_host_function": {
+				"success": "9b9e71445e2d9b459f9bb6173cdb81b9089064ade25446690796cd89cd77d7a7"
+			  }
+			}
+		  }
+		]
+	  },
+	  "ext": "v0"
+	},
+	"resultMetaJson": {
+	  "v3": {
+		"ext": "v0",
+		"tx_changes_before": [
+		  {
+			"state": {
+			  "last_modified_ledger_seq": 589387,
+			  "data": {
+				"account": {
+				  "account_id": "GDCJMCMYNDZ2FV6UMSEYRMUSCX53KCG2AWPBFQ24EA2FFYBCEDMFCBCV",
+				  "balance": 99992272137,
+				  "seq_num": 2531144486617090,
+				  "num_sub_entries": 0,
+				  "inflation_dest": null,
+				  "flags": 0,
+				  "home_domain": "",
+				  "thresholds": "01000000",
+				  "signers": [],
+				  "ext": {
+					"v1": {
+					  "liabilities": {
+						"buying": 0,
+						"selling": 0
+					  },
+					  "ext": {
+						"v2": {
+						  "num_sponsored": 0,
+						  "num_sponsoring": 0,
+						  "signer_sponsoring_i_ds": [],
+						  "ext": {
+							"v3": {
+							  "ext": "v0",
+							  "seq_ledger": 589339,
+							  "seq_time": 1745354921
+							}
+						  }
+						}
+					  }
+					}
+				  }
+				}
+			  },
+			  "ext": "v0"
+			}
+		  },
+		  {
+			"updated": {
+			  "last_modified_ledger_seq": 589387,
+			  "data": {
+				"account": {
+				  "account_id": "GDCJMCMYNDZ2FV6UMSEYRMUSCX53KCG2AWPBFQ24EA2FFYBCEDMFCBCV",
+				  "balance": 99992272137,
+				  "seq_num": 2531144486617091,
+				  "num_sub_entries": 0,
+				  "inflation_dest": null,
+				  "flags": 0,
+				  "home_domain": "",
+				  "thresholds": "01000000",
+				  "signers": [],
+				  "ext": {
+					"v1": {
+					  "liabilities": {
+						"buying": 0,
+						"selling": 0
+					  },
+					  "ext": {
+						"v2": {
+						  "num_sponsored": 0,
+						  "num_sponsoring": 0,
+						  "signer_sponsoring_i_ds": [],
+						  "ext": {
+							"v3": {
+							  "ext": "v0",
+							  "seq_ledger": 589387,
+							  "seq_time": 1745355161
+							}
+						  }
+						}
+					  }
+					}
+				  }
+				}
+			  },
+			  "ext": "v0"
+			}
+		  }
+		],
+		"operations": [
+		  {
+			"changes": []
+		  }
+		],
+		"tx_changes_after": [
+		  {
+			"state": {
+			  "last_modified_ledger_seq": 589387,
+			  "data": {
+				"account": {
+				  "account_id": "GDCJMCMYNDZ2FV6UMSEYRMUSCX53KCG2AWPBFQ24EA2FFYBCEDMFCBCV",
+				  "balance": 99992272137,
+				  "seq_num": 2531144486617091,
+				  "num_sub_entries": 0,
+				  "inflation_dest": null,
+				  "flags": 0,
+				  "home_domain": "",
+				  "thresholds": "01000000",
+				  "signers": [],
+				  "ext": {
+					"v1": {
+					  "liabilities": {
+						"buying": 0,
+						"selling": 0
+					  },
+					  "ext": {
+						"v2": {
+						  "num_sponsored": 0,
+						  "num_sponsoring": 0,
+						  "signer_sponsoring_i_ds": [],
+						  "ext": {
+							"v3": {
+							  "ext": "v0",
+							  "seq_ledger": 589387,
+							  "seq_time": 1745355161
+							}
+						  }
+						}
+					  }
+					}
+				  }
+				}
+			  },
+			  "ext": "v0"
+			}
+		  },
+		  {
+			"updated": {
+			  "last_modified_ledger_seq": 589387,
+			  "data": {
+				"account": {
+				  "account_id": "GDCJMCMYNDZ2FV6UMSEYRMUSCX53KCG2AWPBFQ24EA2FFYBCEDMFCBCV",
+				  "balance": 99992310967,
+				  "seq_num": 2531144486617091,
+				  "num_sub_entries": 0,
+				  "inflation_dest": null,
+				  "flags": 0,
+				  "home_domain": "",
+				  "thresholds": "01000000",
+				  "signers": [],
+				  "ext": {
+					"v1": {
+					  "liabilities": {
+						"buying": 0,
+						"selling": 0
+					  },
+					  "ext": {
+						"v2": {
+						  "num_sponsored": 0,
+						  "num_sponsoring": 0,
+						  "signer_sponsoring_i_ds": [],
+						  "ext": {
+							"v3": {
+							  "ext": "v0",
+							  "seq_ledger": 589387,
+							  "seq_time": 1745355161
+							}
+						  }
+						}
+					  }
+					}
+				  }
+				}
+			  },
+			  "ext": "v0"
+			}
+		  }
+		],
+		"soroban_meta": {
+		  "ext": {
+			"v1": {
+			  "ext": "v0",
+			  "total_non_refundable_resource_fee_charged": 28907,
+			  "total_refundable_resource_fee_charged": 1211,
+			  "rent_fee_charged": 0
+			}
+		  },
+		  "events": [
+			{
+			  "ext": "v0",
+			  "contract_id": "68c7240403d70a0ad5433c749fb755edd73fe28d5cec313894f3e3146d07f4ed",
+			  "type_": "contract",
+			  "body": {
+				"v0": {
+				  "topics": [
+					{
+					  "address": "GDCJMCMYNDZ2FV6UMSEYRMUSCX53KCG2AWPBFQ24EA2FFYBCEDMFCBCV"
+					}
+				  ],
+				  "data": {
+					"string": "test-msg-to-send"
+				  }
+				}
+			  }
+			}
+		  ],
+		  "return_value": "void",
+		  "diagnostic_events": [
+			{
+			  "in_successful_contract_call": true,
+			  "event": {
+				"ext": "v0",
+				"contract_id": null,
+				"type_": "diagnostic",
+				"body": {
+				  "v0": {
+					"topics": [
+					  {
+						"symbol": "fn_call"
+					  },
+					  {
+						"bytes": "68c7240403d70a0ad5433c749fb755edd73fe28d5cec313894f3e3146d07f4ed"
+					  },
+					  {
+						"symbol": "send"
+					  }
+					],
+					"data": {
+					  "vec": [
+						{
+						  "address": "GDCJMCMYNDZ2FV6UMSEYRMUSCX53KCG2AWPBFQ24EA2FFYBCEDMFCBCV"
+						},
+						{
+						  "string": "test-msg-to-send"
+						}
+					  ]
+					}
+				  }
+				}
+			  }
+			},
+			{
+			  "in_successful_contract_call": true,
+			  "event": {
+				"ext": "v0",
+				"contract_id": "68c7240403d70a0ad5433c749fb755edd73fe28d5cec313894f3e3146d07f4ed",
+				"type_": "contract",
+				"body": {
+				  "v0": {
+					"topics": [
+					  {
+						"address": "GDCJMCMYNDZ2FV6UMSEYRMUSCX53KCG2AWPBFQ24EA2FFYBCEDMFCBCV"
+					  }
+					],
+					"data": {
+					  "string": "test-msg-to-send"
+					}
+				  }
+				}
+			  }
+			},
+			{
+			  "in_successful_contract_call": true,
+			  "event": {
+				"ext": "v0",
+				"contract_id": "68c7240403d70a0ad5433c749fb755edd73fe28d5cec313894f3e3146d07f4ed",
+				"type_": "diagnostic",
+				"body": {
+				  "v0": {
+					"topics": [
+					  {
+						"symbol": "fn_return"
+					  },
+					  {
+						"symbol": "send"
+					  }
+					],
+					"data": "void"
+				  }
+				}
+			  }
+			},
+			{
+			  "in_successful_contract_call": false,
+			  "event": {
+				"ext": "v0",
+				"contract_id": null,
+				"type_": "diagnostic",
+				"body": {
+				  "v0": {
+					"topics": [
+					  {
+						"symbol": "core_metrics"
+					  },
+					  {
+						"symbol": "read_entry"
+					  }
+					],
+					"data": {
+					  "u64": 2
+					}
+				  }
+				}
+			  }
+			},
+			{
+			  "in_successful_contract_call": false,
+			  "event": {
+				"ext": "v0",
+				"contract_id": null,
+				"type_": "diagnostic",
+				"body": {
+				  "v0": {
+					"topics": [
+					  {
+						"symbol": "core_metrics"
+					  },
+					  {
+						"symbol": "write_entry"
+					  }
+					],
+					"data": {
+					  "u64": 0
+					}
+				  }
+				}
+			  }
+			},
+			{
+			  "in_successful_contract_call": false,
+			  "event": {
+				"ext": "v0",
+				"contract_id": null,
+				"type_": "diagnostic",
+				"body": {
+				  "v0": {
+					"topics": [
+					  {
+						"symbol": "core_metrics"
+					  },
+					  {
+						"symbol": "ledger_read_byte"
+					  }
+					],
+					"data": {
+					  "u64": 720
+					}
+				  }
+				}
+			  }
+			},
+			{
+			  "in_successful_contract_call": false,
+			  "event": {
+				"ext": "v0",
+				"contract_id": null,
+				"type_": "diagnostic",
+				"body": {
+				  "v0": {
+					"topics": [
+					  {
+						"symbol": "core_metrics"
+					  },
+					  {
+						"symbol": "ledger_write_byte"
+					  }
+					],
+					"data": {
+					  "u64": 0
+					}
+				  }
+				}
+			  }
+			},
+			{
+			  "in_successful_contract_call": false,
+			  "event": {
+				"ext": "v0",
+				"contract_id": null,
+				"type_": "diagnostic",
+				"body": {
+				  "v0": {
+					"topics": [
+					  {
+						"symbol": "core_metrics"
+					  },
+					  {
+						"symbol": "read_key_byte"
+					  }
+					],
+					"data": {
+					  "u64": 84
+					}
+				  }
+				}
+			  }
+			},
+			{
+			  "in_successful_contract_call": false,
+			  "event": {
+				"ext": "v0",
+				"contract_id": null,
+				"type_": "diagnostic",
+				"body": {
+				  "v0": {
+					"topics": [
+					  {
+						"symbol": "core_metrics"
+					  },
+					  {
+						"symbol": "write_key_byte"
+					  }
+					],
+					"data": {
+					  "u64": 0
+					}
+				  }
+				}
+			  }
+			},
+			{
+			  "in_successful_contract_call": false,
+			  "event": {
+				"ext": "v0",
+				"contract_id": null,
+				"type_": "diagnostic",
+				"body": {
+				  "v0": {
+					"topics": [
+					  {
+						"symbol": "core_metrics"
+					  },
+					  {
+						"symbol": "read_data_byte"
+					  }
+					],
+					"data": {
+					  "u64": 104
+					}
+				  }
+				}
+			  }
+			},
+			{
+			  "in_successful_contract_call": false,
+			  "event": {
+				"ext": "v0",
+				"contract_id": null,
+				"type_": "diagnostic",
+				"body": {
+				  "v0": {
+					"topics": [
+					  {
+						"symbol": "core_metrics"
+					  },
+					  {
+						"symbol": "write_data_byte"
+					  }
+					],
+					"data": {
+					  "u64": 0
+					}
+				  }
+				}
+			  }
+			},
+			{
+			  "in_successful_contract_call": false,
+			  "event": {
+				"ext": "v0",
+				"contract_id": null,
+				"type_": "diagnostic",
+				"body": {
+				  "v0": {
+					"topics": [
+					  {
+						"symbol": "core_metrics"
+					  },
+					  {
+						"symbol": "read_code_byte"
+					  }
+					],
+					"data": {
+					  "u64": 616
+					}
+				  }
+				}
+			  }
+			},
+			{
+			  "in_successful_contract_call": false,
+			  "event": {
+				"ext": "v0",
+				"contract_id": null,
+				"type_": "diagnostic",
+				"body": {
+				  "v0": {
+					"topics": [
+					  {
+						"symbol": "core_metrics"
+					  },
+					  {
+						"symbol": "write_code_byte"
+					  }
+					],
+					"data": {
+					  "u64": 0
+					}
+				  }
+				}
+			  }
+			},
+			{
+			  "in_successful_contract_call": false,
+			  "event": {
+				"ext": "v0",
+				"contract_id": null,
+				"type_": "diagnostic",
+				"body": {
+				  "v0": {
+					"topics": [
+					  {
+						"symbol": "core_metrics"
+					  },
+					  {
+						"symbol": "emit_event"
+					  }
+					],
+					"data": {
+					  "u64": 1
+					}
+				  }
+				}
+			  }
+			},
+			{
+			  "in_successful_contract_call": false,
+			  "event": {
+				"ext": "v0",
+				"contract_id": null,
+				"type_": "diagnostic",
+				"body": {
+				  "v0": {
+					"topics": [
+					  {
+						"symbol": "core_metrics"
+					  },
+					  {
+						"symbol": "emit_event_byte"
+					  }
+					],
+					"data": {
+					  "u64": 120
+					}
+				  }
+				}
+			  }
+			},
+			{
+			  "in_successful_contract_call": false,
+			  "event": {
+				"ext": "v0",
+				"contract_id": null,
+				"type_": "diagnostic",
+				"body": {
+				  "v0": {
+					"topics": [
+					  {
+						"symbol": "core_metrics"
+					  },
+					  {
+						"symbol": "cpu_insn"
+					  }
+					],
+					"data": {
+					  "u64": 474376
+					}
+				  }
+				}
+			  }
+			},
+			{
+			  "in_successful_contract_call": false,
+			  "event": {
+				"ext": "v0",
+				"contract_id": null,
+				"type_": "diagnostic",
+				"body": {
+				  "v0": {
+					"topics": [
+					  {
+						"symbol": "core_metrics"
+					  },
+					  {
+						"symbol": "mem_byte"
+					  }
+					],
+					"data": {
+					  "u64": 1175098
+					}
+				  }
+				}
+			  }
+			},
+			{
+			  "in_successful_contract_call": false,
+			  "event": {
+				"ext": "v0",
+				"contract_id": null,
+				"type_": "diagnostic",
+				"body": {
+				  "v0": {
+					"topics": [
+					  {
+						"symbol": "core_metrics"
+					  },
+					  {
+						"symbol": "invoke_time_nsecs"
+					  }
+					],
+					"data": {
+					  "u64": 364106
+					}
+				  }
+				}
+			  }
+			},
+			{
+			  "in_successful_contract_call": false,
+			  "event": {
+				"ext": "v0",
+				"contract_id": null,
+				"type_": "diagnostic",
+				"body": {
+				  "v0": {
+					"topics": [
+					  {
+						"symbol": "core_metrics"
+					  },
+					  {
+						"symbol": "max_rw_key_byte"
+					  }
+					],
+					"data": {
+					  "u64": 48
+					}
+				  }
+				}
+			  }
+			},
+			{
+			  "in_successful_contract_call": false,
+			  "event": {
+				"ext": "v0",
+				"contract_id": null,
+				"type_": "diagnostic",
+				"body": {
+				  "v0": {
+					"topics": [
+					  {
+						"symbol": "core_metrics"
+					  },
+					  {
+						"symbol": "max_rw_data_byte"
+					  }
+					],
+					"data": {
+					  "u64": 104
+					}
+				  }
+				}
+			  }
+			},
+			{
+			  "in_successful_contract_call": false,
+			  "event": {
+				"ext": "v0",
+				"contract_id": null,
+				"type_": "diagnostic",
+				"body": {
+				  "v0": {
+					"topics": [
+					  {
+						"symbol": "core_metrics"
+					  },
+					  {
+						"symbol": "max_rw_code_byte"
+					  }
+					],
+					"data": {
+					  "u64": 616
+					}
+				  }
+				}
+			  }
+			},
+			{
+			  "in_successful_contract_call": false,
+			  "event": {
+				"ext": "v0",
+				"contract_id": null,
+				"type_": "diagnostic",
+				"body": {
+				  "v0": {
+					"topics": [
+					  {
+						"symbol": "core_metrics"
+					  },
+					  {
+						"symbol": "max_emit_event_byte"
+					  }
+					],
+					"data": {
+					  "u64": 120
+					}
+				  }
+				}
+			  }
+			}
+		  ]
+		}
+	  }
+	},
+	"diagnosticEventsJson": [
+	  {
+		"in_successful_contract_call": true,
+		"event": {
+		  "ext": "v0",
+		  "contract_id": null,
+		  "type_": "diagnostic",
+		  "body": {
+			"v0": {
+			  "topics": [
+				{
+				  "symbol": "fn_call"
+				},
+				{
+				  "bytes": "68c7240403d70a0ad5433c749fb755edd73fe28d5cec313894f3e3146d07f4ed"
+				},
+				{
+				  "symbol": "send"
+				}
+			  ],
+			  "data": {
+				"vec": [
+				  {
+					"address": "GDCJMCMYNDZ2FV6UMSEYRMUSCX53KCG2AWPBFQ24EA2FFYBCEDMFCBCV"
+				  },
+				  {
+					"string": "test-msg-to-send"
+				  }
+				]
+			  }
+			}
+		  }
+		}
+	  },
+	  {
+		"in_successful_contract_call": true,
+		"event": {
+		  "ext": "v0",
+		  "contract_id": "68c7240403d70a0ad5433c749fb755edd73fe28d5cec313894f3e3146d07f4ed",
+		  "type_": "contract",
+		  "body": {
+			"v0": {
+			  "topics": [
+				{
+				  "address": "GDCJMCMYNDZ2FV6UMSEYRMUSCX53KCG2AWPBFQ24EA2FFYBCEDMFCBCV"
+				}
+			  ],
+			  "data": {
+				"string": "test-msg-to-send"
+			  }
+			}
+		  }
+		}
+	  },
+	  {
+		"in_successful_contract_call": true,
+		"event": {
+		  "ext": "v0",
+		  "contract_id": "68c7240403d70a0ad5433c749fb755edd73fe28d5cec313894f3e3146d07f4ed",
+		  "type_": "diagnostic",
+		  "body": {
+			"v0": {
+			  "topics": [
+				{
+				  "symbol": "fn_return"
+				},
+				{
+				  "symbol": "send"
+				}
+			  ],
+			  "data": "void"
+			}
+		  }
+		}
+	  },
+	  {
+		"in_successful_contract_call": false,
+		"event": {
+		  "ext": "v0",
+		  "contract_id": null,
+		  "type_": "diagnostic",
+		  "body": {
+			"v0": {
+			  "topics": [
+				{
+				  "symbol": "core_metrics"
+				},
+				{
+				  "symbol": "read_entry"
+				}
+			  ],
+			  "data": {
+				"u64": 2
+			  }
+			}
+		  }
+		}
+	  },
+	  {
+		"in_successful_contract_call": false,
+		"event": {
+		  "ext": "v0",
+		  "contract_id": null,
+		  "type_": "diagnostic",
+		  "body": {
+			"v0": {
+			  "topics": [
+				{
+				  "symbol": "core_metrics"
+				},
+				{
+				  "symbol": "write_entry"
+				}
+			  ],
+			  "data": {
+				"u64": 0
+			  }
+			}
+		  }
+		}
+	  },
+	  {
+		"in_successful_contract_call": false,
+		"event": {
+		  "ext": "v0",
+		  "contract_id": null,
+		  "type_": "diagnostic",
+		  "body": {
+			"v0": {
+			  "topics": [
+				{
+				  "symbol": "core_metrics"
+				},
+				{
+				  "symbol": "ledger_read_byte"
+				}
+			  ],
+			  "data": {
+				"u64": 720
+			  }
+			}
+		  }
+		}
+	  },
+	  {
+		"in_successful_contract_call": false,
+		"event": {
+		  "ext": "v0",
+		  "contract_id": null,
+		  "type_": "diagnostic",
+		  "body": {
+			"v0": {
+			  "topics": [
+				{
+				  "symbol": "core_metrics"
+				},
+				{
+				  "symbol": "ledger_write_byte"
+				}
+			  ],
+			  "data": {
+				"u64": 0
+			  }
+			}
+		  }
+		}
+	  },
+	  {
+		"in_successful_contract_call": false,
+		"event": {
+		  "ext": "v0",
+		  "contract_id": null,
+		  "type_": "diagnostic",
+		  "body": {
+			"v0": {
+			  "topics": [
+				{
+				  "symbol": "core_metrics"
+				},
+				{
+				  "symbol": "read_key_byte"
+				}
+			  ],
+			  "data": {
+				"u64": 84
+			  }
+			}
+		  }
+		}
+	  },
+	  {
+		"in_successful_contract_call": false,
+		"event": {
+		  "ext": "v0",
+		  "contract_id": null,
+		  "type_": "diagnostic",
+		  "body": {
+			"v0": {
+			  "topics": [
+				{
+				  "symbol": "core_metrics"
+				},
+				{
+				  "symbol": "write_key_byte"
+				}
+			  ],
+			  "data": {
+				"u64": 0
+			  }
+			}
+		  }
+		}
+	  },
+	  {
+		"in_successful_contract_call": false,
+		"event": {
+		  "ext": "v0",
+		  "contract_id": null,
+		  "type_": "diagnostic",
+		  "body": {
+			"v0": {
+			  "topics": [
+				{
+				  "symbol": "core_metrics"
+				},
+				{
+				  "symbol": "read_data_byte"
+				}
+			  ],
+			  "data": {
+				"u64": 104
+			  }
+			}
+		  }
+		}
+	  },
+	  {
+		"in_successful_contract_call": false,
+		"event": {
+		  "ext": "v0",
+		  "contract_id": null,
+		  "type_": "diagnostic",
+		  "body": {
+			"v0": {
+			  "topics": [
+				{
+				  "symbol": "core_metrics"
+				},
+				{
+				  "symbol": "write_data_byte"
+				}
+			  ],
+			  "data": {
+				"u64": 0
+			  }
+			}
+		  }
+		}
+	  },
+	  {
+		"in_successful_contract_call": false,
+		"event": {
+		  "ext": "v0",
+		  "contract_id": null,
+		  "type_": "diagnostic",
+		  "body": {
+			"v0": {
+			  "topics": [
+				{
+				  "symbol": "core_metrics"
+				},
+				{
+				  "symbol": "read_code_byte"
+				}
+			  ],
+			  "data": {
+				"u64": 616
+			  }
+			}
+		  }
+		}
+	  },
+	  {
+		"in_successful_contract_call": false,
+		"event": {
+		  "ext": "v0",
+		  "contract_id": null,
+		  "type_": "diagnostic",
+		  "body": {
+			"v0": {
+			  "topics": [
+				{
+				  "symbol": "core_metrics"
+				},
+				{
+				  "symbol": "write_code_byte"
+				}
+			  ],
+			  "data": {
+				"u64": 0
+			  }
+			}
+		  }
+		}
+	  },
+	  {
+		"in_successful_contract_call": false,
+		"event": {
+		  "ext": "v0",
+		  "contract_id": null,
+		  "type_": "diagnostic",
+		  "body": {
+			"v0": {
+			  "topics": [
+				{
+				  "symbol": "core_metrics"
+				},
+				{
+				  "symbol": "emit_event"
+				}
+			  ],
+			  "data": {
+				"u64": 1
+			  }
+			}
+		  }
+		}
+	  },
+	  {
+		"in_successful_contract_call": false,
+		"event": {
+		  "ext": "v0",
+		  "contract_id": null,
+		  "type_": "diagnostic",
+		  "body": {
+			"v0": {
+			  "topics": [
+				{
+				  "symbol": "core_metrics"
+				},
+				{
+				  "symbol": "emit_event_byte"
+				}
+			  ],
+			  "data": {
+				"u64": 120
+			  }
+			}
+		  }
+		}
+	  },
+	  {
+		"in_successful_contract_call": false,
+		"event": {
+		  "ext": "v0",
+		  "contract_id": null,
+		  "type_": "diagnostic",
+		  "body": {
+			"v0": {
+			  "topics": [
+				{
+				  "symbol": "core_metrics"
+				},
+				{
+				  "symbol": "cpu_insn"
+				}
+			  ],
+			  "data": {
+				"u64": 474376
+			  }
+			}
+		  }
+		}
+	  },
+	  {
+		"in_successful_contract_call": false,
+		"event": {
+		  "ext": "v0",
+		  "contract_id": null,
+		  "type_": "diagnostic",
+		  "body": {
+			"v0": {
+			  "topics": [
+				{
+				  "symbol": "core_metrics"
+				},
+				{
+				  "symbol": "mem_byte"
+				}
+			  ],
+			  "data": {
+				"u64": 1175098
+			  }
+			}
+		  }
+		}
+	  },
+	  {
+		"in_successful_contract_call": false,
+		"event": {
+		  "ext": "v0",
+		  "contract_id": null,
+		  "type_": "diagnostic",
+		  "body": {
+			"v0": {
+			  "topics": [
+				{
+				  "symbol": "core_metrics"
+				},
+				{
+				  "symbol": "invoke_time_nsecs"
+				}
+			  ],
+			  "data": {
+				"u64": 364106
+			  }
+			}
+		  }
+		}
+	  },
+	  {
+		"in_successful_contract_call": false,
+		"event": {
+		  "ext": "v0",
+		  "contract_id": null,
+		  "type_": "diagnostic",
+		  "body": {
+			"v0": {
+			  "topics": [
+				{
+				  "symbol": "core_metrics"
+				},
+				{
+				  "symbol": "max_rw_key_byte"
+				}
+			  ],
+			  "data": {
+				"u64": 48
+			  }
+			}
+		  }
+		}
+	  },
+	  {
+		"in_successful_contract_call": false,
+		"event": {
+		  "ext": "v0",
+		  "contract_id": null,
+		  "type_": "diagnostic",
+		  "body": {
+			"v0": {
+			  "topics": [
+				{
+				  "symbol": "core_metrics"
+				},
+				{
+				  "symbol": "max_rw_data_byte"
+				}
+			  ],
+			  "data": {
+				"u64": 104
+			  }
+			}
+		  }
+		}
+	  },
+	  {
+		"in_successful_contract_call": false,
+		"event": {
+		  "ext": "v0",
+		  "contract_id": null,
+		  "type_": "diagnostic",
+		  "body": {
+			"v0": {
+			  "topics": [
+				{
+				  "symbol": "core_metrics"
+				},
+				{
+				  "symbol": "max_rw_code_byte"
+				}
+			  ],
+			  "data": {
+				"u64": 616
+			  }
+			}
+		  }
+		}
+	  },
+	  {
+		"in_successful_contract_call": false,
+		"event": {
+		  "ext": "v0",
+		  "contract_id": null,
+		  "type_": "diagnostic",
+		  "body": {
+			"v0": {
+			  "topics": [
+				{
+				  "symbol": "core_metrics"
+				},
+				{
+				  "symbol": "max_emit_event_byte"
+				}
+			  ],
+			  "data": {
+				"u64": 120
+			  }
+			}
+		  }
+		}
+	  }
+	],
+	"ledger": 589387,
+	"createdAt": "1745355161"
+  }
+}
