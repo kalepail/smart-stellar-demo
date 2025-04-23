@@ -1,57 +1,25 @@
 <script lang="ts">
     import {contractId} from "../store/contractId";
-    import {truncate} from "../utils/base";
     import {onDestroy , onMount} from "svelte";
     import {keyId} from "../store/keyId";
     import {chat} from "../utils/chat";
-    import type {ChatEvent} from "../utils/chat-event-builder.ts";
-    import {LocalRpcServer} from "../utils/local-rpc-server.ts";
     import {account , server} from "../utils/passkey-kit";
-    import {getMessages} from "../utils/zettablocks";
 
     let interval: NodeJS.Timeout;
 
     let msg: string = "";
-    let msgs: ChatEvent[] = [];
-    let localRpcServer: LocalRpcServer =
-        new LocalRpcServer ();
 
     let sending: boolean = false;
-    let refreshActive = false;
 
     onMount (async () => {
-        await callGetMessages ();
-
-        await callGetEvents (); // last 24 hrs
 
         interval = setInterval (async () => {
-            await callGetEvents (); // last 24 hrs
         } , 12_000); // 5 times per minute
     });
 
     onDestroy (() => {
         if (interval) clearInterval (interval);
     });
-
-    async function callGetMessages () {
-
-        msgs = await getMessages ();
-        msgs = msgs.sort (
-            (a , b) => a.timestamp.getTime () - b.timestamp.getTime () ,
-        );
-    }
-
-    async function callGetEvents () {
-        refreshActive = true;
-        let newFilteredEventsFromChatContract: ChatEvent[] =
-            await localRpcServer.getFilteredEventsForContract ("10");
-
-        console.log (newFilteredEventsFromChatContract.length);
-        console.log (msgs.length);
-
-        msgs.push (... newFilteredEventsFromChatContract);
-        refreshActive = false;
-    }
 
     async function send () {
         if (!$contractId || !$keyId) return;
@@ -79,34 +47,6 @@
 <div class="flex flex-col min-w-full items-center my-10">
     {#if $contractId}
         <div class="max-w-[350px] w-full">
-            <ul>
-                {#each msgs as event}
-                    <li class="mb-2">
-                        <span
-                                class="text-mono text-sm bg-black rounded-t-lg text-white px-3 py-1"
-                        >
-                            <a
-                                    class="underline"
-                                    target="_blank"
-                                    href="https://stellar.expert/explorer/public/tx/{event.txHash}"
-                            >{truncate(event.addr, 4)}</a
-                            >
-                            &nbsp; &nbsp;
-                            <time
-                                    class="text-xs text-gray-400"
-                                    datetime={event.timestamp.toUTCString()}
-                            >
-                                {event.timestamp.toLocaleTimeString()}
-                            </time>
-                        </span>
-                        <p
-                                class="min-w-[220px] text-pretty break-words bg-gray-200 px-3 py-1 rounded-b-lg rounded-tr-lg border border-gray-400"
-                        >
-                            {event.msg}
-                        </p>
-                    </li>
-                {/each}
-            </ul>
 
             <form class="flex flex-col mt-5" on:submit|preventDefault={send}>
                 <textarea

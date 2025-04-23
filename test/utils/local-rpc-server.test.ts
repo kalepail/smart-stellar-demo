@@ -1,6 +1,6 @@
 import {Contract , xdr} from "@stellar/stellar-sdk";
 import {Api , Server as RpcServer} from '@stellar/stellar-sdk/minimal/rpc';
-import {beforeEach , describe , expect , expectTypeOf , it , vi} from 'vitest';
+import {beforeAll , beforeEach , describe , expect , expectTypeOf , it , vi} from 'vitest';
 import type {ChatEvent} from "../../src/utils/chat-event-builder.ts";
 import {LocalRpcServer} from '../../src/utils/local-rpc-server.ts';
 
@@ -10,14 +10,12 @@ const PUBLIC_START_LEDGER: number = 589387;
 const mockCursor: string = "0002533562553204735-4294967295";
 const expectedId: string = "8675309";
 
-vi.mock ('import.meta' , () => ({
-    env: {
-        PUBLIC_RPC_URL: 'https://mock-rpc-url.stellar.org' ,
-        PUBLIC_NETWORK_PASSPHRASE: 'Test SDF Network ; September 2015' ,
-        PUBLIC_CHAT_CONTRACT_ID: MOCK_CONTRACT_ID ,
-        PUBLIC_START_LEDGER: PUBLIC_START_LEDGER ,
-    } ,
-}));
+beforeAll (() => {
+    vi.stubEnv ('PUBLIC_RPC_URL' , 'Test SDF Network ; September 2015');
+    vi.stubEnv ('PUBLIC_NETWORK_PASSPHRASE' , 'https://mock-rpc-url.stellar.org');
+    vi.stubEnv ('PUBLIC_CHAT_CONTRACT_ID' , MOCK_CONTRACT_ID);
+    vi.stubEnv ('PUBLIC_START_LEDGER' , "589387");
+});
 
 // Mock RpcServer class
 vi.mock ('@stellar/stellar-sdk/minimal/rpc' , () => {

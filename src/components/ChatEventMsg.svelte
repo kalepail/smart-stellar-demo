@@ -5,14 +5,11 @@
 <script lang="ts">
     import {LocalRpcServer} from "../utils/local-rpc-server.js";
     import type {ChatEvent} from "../utils/chat-event-builder.ts";
-    import {StellarToml} from "@stellar/stellar-sdk/no-eventsource";
 
     let msgs: ChatEvent[] = $state ([]);
 
     let localRpcServer: LocalRpcServer =
         new LocalRpcServer ();
-
-    console.log (localRpcServer);
 
     let refreshActive = $state (false);
 
@@ -21,9 +18,6 @@
         refreshActive = true;
         let newFilteredEventsFromChatContract: ChatEvent[] =
             await localRpcServer.getFilteredEventsForContract ("10");
-
-        console.log (newFilteredEventsFromChatContract.length);
-        console.log (msgs.length);
 
         msgs.push (... newFilteredEventsFromChatContract);
         refreshActive = false;

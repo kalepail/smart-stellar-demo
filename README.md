@@ -251,7 +251,8 @@ Here's an example of the diagnostic event emitted by the contract after we invok
 
 ## Polling for Events using the CLI, cURL, or Stellar Lab
 
-You can query an RPC endpoint with the Stellar CLI, a HTTP request(Axios or cURL), using the Javascript SDK, or using [Stellar Lab]
+You can query an RPC endpoint with the Stellar CLI, a HTTP request(Axios or cURL), using the Javascript SDK, or
+using [Stellar Lab]
 (https://lab.stellar.org/)
 
 Poll for events using a `cursor` parameter:
@@ -364,14 +365,17 @@ Now let's take a look at some of the other code in this repo.
 
 Path:  `src/utils/local-rpc-server.ts`
 
-The `LocalRpcServer` class provides a robust interface for interacting with Stellar's RPC server to retrieve and process contract events from the Soroban blockchain. It handles the complexities of RPC communication, event filtering, data validation, and transformation.
+The `LocalRpcServer` class provides a robust interface for interacting with Stellar's RPC server to retrieve and process
+contract events from the Soroban blockchain. It handles the complexities of RPC communication, event filtering, data
+validation, and transformation.
 
 ### Functionality
 
 - **Contract Event Retrieval**: Fetches contract events from the Stellar network using using a RpcServer built with
   the [Stellar Javascript SDK](https://stellar.github.io/js-stellar-sdk/)
 - **Event Filtering**: Filters events by contract ID, topic and validates data integrity
-- **Event Transformation**: Converts raw `Api.GetEventsResponse` responses into structured `ChatEvent` objects using a builder pattern with built-in validation and error-handling via
+- **Event Transformation**: Converts raw `Api.GetEventsResponse` responses into structured `ChatEvent` objects using a
+  builder pattern with built-in validation and error-handling via
   the [chat-event-builder.ts](src/utils/chat-event-builder.ts) class.
 - **Deduplication**: Ensures each event is processed only once through in-memory ID uniqueness
 
@@ -404,8 +408,106 @@ Additionally, the class uses these internal configuration values:
     - Transforms validated events into structured `ChatEvent` objects using the `ChatEventBuilder` class
     - Returns an array of processed events
 
-### Usage Example
+## Usage Example
 
+Let's walk through an example watching how data goes from the RpcServer to your UI.
+
+### Front-end
+
+Check out the following file:
+`src/components/ChatEventMsg.svelte`
+
+This component requests emitted events from a rpc server and the prints out the resulting chat messages emitted in the
+events.
+
+```typescript
+    async function callGetEvents () {
+    refreshActive = true;
+    let newFilteredEventsFromChatContract: ChatEvent[] =
+        await localRpcServer.getFilteredEventsForContract ("10");
+
+    msgs.push (... newFilteredEventsFromChatContract);
+    refreshActive = false;
+}
 ```
 
+We can see that we are calling the `getFilteredEventsForContract()` function on a local rpc server and the result of
+that call is an array of ChatEvent objects that is then pushed onto an array.
+
+**Reactive State**
+
+Wrapping the data on the assignment side of a variable declaration with the following state annotation `$state (DATA)`
+marks that data as "Reactive State" which means the UI responds to changes in the value of that data. Read more here on
+using [$state](https://svelte.dev/docs/svelte/$state)
+
+``` typescript
+let msgs: ChatEvent[] = $state ([]);
 ```
+
+**Updating the UI**
+
+Here's an example of updating the UI in responses to changes in the state.
+
+```sveltehtml
+
+<ul role="list" class="divide-y divide-gray-100">
+
+    {#each msgs as msg, i}
+        <li class="flex gap-x-1 py-4">
+            {msg.id}
+        </li>
+
+    {/each}
+
+</ul>
+```
+
+Svelte has a expression language like many front-end frameworks that allows you to define dynamic UI elements such as
+this unordered lists that displays bullet points of msg content in repose to messages being pushed on the msgs array.
+
+### Back-end
+
+Check out the following file:
+`src/utils/local-rpc-server.ts`
+
+This service exposes a function called `getFilteredEventsForContract` that querys a rpc server with various filters and
+parameters and returns the results. In this case, we are looking for events emitted by a deployed smart contract on the
+blockchain.
+
+```typescript
+
+async function getFilteredEventsForContract (cursor: string): Promise<ChatEvent[]> {
+    let last24HoursOfEventsSequence: number =
+        await this.getLast24HourSequence ();
+
+    const eventRequest: RpcServer.GetEventsRequest = {
+        filters: this.eventFilters ,
+        startLedger: last24HoursOfEventsSequence ,
+        limit: this._limit ,
+    };
+
+    return await this.instance
+                     .getEvents (eventRequest)
+                     .then (this.successfulRequestEventHandler)
+                     .catch (this.getOnError);
+}
+```
+
+Next let's take a look at the request handler.
+
+```typescript
+    function successfulRequestEventHandler (eventResponse: Api.GetEventsResponse): ChatEvent[] {
+    const events: Api.EventResponse[] = eventResponse.events;
+    if (events.length === 0) return [];
+
+    return events
+        .map ((event: Api.EventResponse) => event as Api.EventResponse)
+        .filter ((event) => event.type === "contract")
+        .filter ((event) => this.contractDataIsDefined (event))
+        .filter ((event) => this.deduplicateEventIds (event))
+        .map ((event) => this.transformApiResponseToChatEvent (event))
+        .sort (this.decendingTimestampSort ());
+    }
+```
+
+This function takes a response from the rpc server and performs various validations, filtering and transformations to extract the data we need on the front-end!

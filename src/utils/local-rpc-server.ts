@@ -40,9 +40,6 @@ export class LocalRpcServer {
         this.contractDataIsDefined = this.contractDataIsDefined.bind (this);
         this.successfulRequestEventHandler = this.successfulRequestEventHandler.bind (this);
         this.getOnError = this.getOnError.bind (this);
-
-        console.log (`Contract ID: ${this._contractId}`);
-        console.log(import.meta.env.PUBLIC_CHAT_CONTRACT_ID);
     }
 
     /**
@@ -62,9 +59,12 @@ export class LocalRpcServer {
      * @param eventResponse - The event response to validate
      * @returns True if all required fields (contractId, id, value) are defined
      */
-    contractDataIsDefined = (eventResponse: Api.EventResponse) => eventResponse.contractId !== undefined && eventResponse.contractId !== null
-                                                                  && eventResponse.id !== undefined && eventResponse.id !== null &&
-                                                                  eventResponse.value !== undefined && eventResponse.value !== null;
+    contractDataIsDefined (eventResponse: Api.EventResponse): boolean {
+
+        return eventResponse.contractId !== undefined && eventResponse.contractId !== null
+               && eventResponse.id !== undefined && eventResponse.id !== null &&
+               eventResponse.value !== undefined && eventResponse.value !== null;
+    }
 
     private getOnError (reason: any): ChatEvent[] {
         console.error (reason);
@@ -85,9 +85,6 @@ export class LocalRpcServer {
     private successfulRequestEventHandler (eventResponse: Api.GetEventsResponse): ChatEvent[] {
         const events: Api.EventResponse[] = eventResponse.events;
         if (events.length === 0) return [];
-
-        console.log(eventResponse);
-        console.log(events);
 
         return events
             .map ((event: Api.EventResponse) => event as Api.EventResponse)
@@ -136,22 +133,16 @@ export class LocalRpcServer {
         let last24HoursOfEventsSequence: number =
             await this.getLast24HourSequence ();
 
-        console.log (`Last 24 hours of events sequence: ${last24HoursOfEventsSequence}`);
-
         const eventRequest: RpcServer.GetEventsRequest = {
             filters: this.eventFilters ,
             startLedger: last24HoursOfEventsSequence ,
             limit: this._limit ,
         };
 
-        console.log(eventRequest);
-
-        console.log(this.instance);
-
         return await this.instance
-                   .getEvents (eventRequest)
-                   .then (this.successfulRequestEventHandler)
-                   .catch (this.getOnError);
+                         .getEvents (eventRequest)
+                         .then (this.successfulRequestEventHandler)
+                         .catch (this.getOnError);
     }
 
     /**
