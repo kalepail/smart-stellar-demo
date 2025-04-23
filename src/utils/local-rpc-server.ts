@@ -45,14 +45,15 @@ export class LocalRpcServer {
     /**
      * Returns the underlying RPC server instance.
      *
-     * @returns The RPC server instance used for communication with the Stellar network.
+     * @returns The `RpcServer` instance used for communication with
+     * the [Stellar network](https://www.stellar.org/).
      */
     public getInstance (): RpcServer {
         return this.instance;
     }
 
     /**
-     * Validates that all required fields are present in an event response.
+     * Validates that all required fields are present in an `Api.EventResponse`.
      *
      * @param eventResponse - The event response to validate
      * @returns True if all required fields (contractId, id, value) are defined
@@ -69,13 +70,14 @@ export class LocalRpcServer {
     }
 
     /**
-     * Handles `Api.GetEventsResponse` returned from the RPC server `getEvents` call.
+     * Handles `Api.GetEventsResponse` returned from the `RpcServer`
+     * [getEvents](https://developers.stellar.org/docs/data/apis/rpc/api-reference/methods/getEvents) call.
      *
      * This method filters out non-contract events and validates required data is present.
      * It then extracts and transforms data into an array of `ChatEvent` objects.
      *
-     * @param eventResponse - Successful response from the RPC server
-     * @returns Promise resolving to an array of ChatEvents
+     * @param eventResponse - Successful response from the `RpcServer`
+     * @returns An array of `ChatEvent`s
      * @throws Error in case of invalid data
      */
     private successfulRequestEventHandler (eventResponse: Api.GetEventsResponse): ChatEvent[] {
