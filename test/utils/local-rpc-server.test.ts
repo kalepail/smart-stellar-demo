@@ -22,8 +22,10 @@ vi.mock ('import.meta' , () => ({
 // Mock RpcServer class
 vi.mock ('@stellar/stellar-sdk/minimal/rpc' , () => {
     const mockGetEvents = vi.fn ();
+    const mockGetLatestLedger = vi.fn ();
     const RpcServer = vi.fn ().mockImplementation (() => ({
         getEvents: mockGetEvents ,
+        getLatestLedger: mockGetLatestLedger
     }));
     return {Server: RpcServer};
 });
@@ -75,6 +77,7 @@ function assertChatEventObjectIsPopulated (result: ChatEvent[] , index: number ,
 
 describe ('LocalRpcServer' , () => {
     let mockGetEventsFn: ReturnType<typeof vi.fn>;
+    let mockGetLatestLedgerFn: ReturnType<typeof vi.fn>;
 
     beforeEach (() => {
         vi.resetModules ();
@@ -82,6 +85,7 @@ describe ('LocalRpcServer' , () => {
 
         const rpcServerMock = new RpcServer ('https://mock-rpc-url.stellar.org');
         mockGetEventsFn = rpcServerMock.getEvents as ReturnType<typeof vi.fn>;
+        mockGetLatestLedgerFn = rpcServerMock.getLatestLedger as ReturnType<typeof vi.fn>;
     });
 
     describe ('getFilteredEventsForContract' , () => {
@@ -89,6 +93,11 @@ describe ('LocalRpcServer' , () => {
             const mockEventsResponse = buildMockEventsResponse ([expectedId , "8675319"]);
 
             mockGetEventsFn.mockResolvedValueOnce (mockEventsResponse);
+            mockGetLatestLedgerFn.mockResolvedValueOnce ({
+                                                             id: "8675319" ,
+                                                             sequence: 8675319 ,
+                                                             protocolVersion: "22"
+                                                         });
 
             const result: ChatEvent[] = await getLocalRpcServer ()
                 .getFilteredEventsForContract (mockCursor);
@@ -101,6 +110,11 @@ describe ('LocalRpcServer' , () => {
 
         it ('should return empty array if no events are found' , async () => {
             mockGetEventsFn.mockResolvedValueOnce ({events: [] , cursor: mockCursor});
+            mockGetLatestLedgerFn.mockResolvedValueOnce ({
+                                                             id: "8675319" ,
+                                                             sequence: 8675319 ,
+                                                             protocolVersion: "22"
+                                                         });
 
             const result = await getLocalRpcServer ().getFilteredEventsForContract ('cursor-empty');
 
@@ -113,6 +127,11 @@ describe ('LocalRpcServer' , () => {
             const duplicateEvent = buildMockEventsResponse ([expectedId , expectedId , expectedId , expectedId]);
 
             mockGetEventsFn.mockResolvedValueOnce (duplicateEvent);
+            mockGetLatestLedgerFn.mockResolvedValueOnce ({
+                                                             id: "8675319" ,
+                                                             sequence: 8675319 ,
+                                                             protocolVersion: "22"
+                                                         });
 
             const result = await getLocalRpcServer ()
                 .getFilteredEventsForContract (mockCursor);
@@ -124,6 +143,11 @@ describe ('LocalRpcServer' , () => {
             nonContractEvent.events[0].type = "diagnostic";
 
             mockGetEventsFn.mockResolvedValueOnce (nonContractEvent);
+            mockGetLatestLedgerFn.mockResolvedValueOnce ({
+                                                             id: "8675319" ,
+                                                             sequence: 8675319 ,
+                                                             protocolVersion: "22"
+                                                         });
 
             const result = await getLocalRpcServer ().getFilteredEventsForContract (mockCursor);
 
