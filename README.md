@@ -21,8 +21,7 @@ With **Astro** and **Svelte** on the front-end.
 - **Passkey Kit** for seamless biometric authentication
 - **Launchtube** for transaction lifecycle management and paymaster functionality
 - GraphQL event data with **Zettablock**
-- [TypeScript bindings](https://developers.stellar.
-  org/docs/tools/cli/stellar-cli#stellar-contract-bindings-typescript) generated with the Stellar CLI
+- [TypeScript bindings](https://developers.stellar.org/docs/tools/cli/stellar-cli#stellar-contract-bindings-typescript) generated with the Stellar CLI
 
 ---
 
@@ -39,9 +38,9 @@ with [Policy Signers](https://github.com/kalepail/passkey-kit/tree/next/contract
 Implementing [WebAuthn](https://webauthn.io/) standards, Passkey Kit removes the complexity of Web3 on-boarding.
 
 1. **Passwordless Login**: Streamlined onboarding. No more magic link emails, OTPs, or registration forms
-2. **Biometric Signing**: Users can use their device's biometric authentication or password management software
+2. **Biometric Signing**: Users can use their device's biometric authentication or password managers
 3. **Fine-Grained Authorization**: Configured fine-grained transaction signing credentials with modular access
-4. **Seamless UX**: Provide a familar login flow
+4. **Seamless UX**: Provide familiar login flow
 
 ---
 
@@ -54,8 +53,7 @@ Launchtube is a super cool service that abstracts away the complexity of submitt
 **Smart Contract Development is Complex:**
 
 - Determining the footprint of an operation
--
-Different [types of storage durability](https://developers.stellar.org/docs/build/guides/storage/choosing-the-right-storage)
+- [Storage durability](https://developers.stellar.org/docs/build/guides/storage/choosing-the-right-storage)
 - [TTLs](https://developers.stellar.org/docs/learn/encyclopedia/storage/state-archival#ttl)
 - Managing [XDR binary data](https://developers.stellar.org/docs/learn/encyclopedia/data-format/xdr)
 - Considering [resource fees](https://developers.stellar.org/docs/networks/resource-limits-fees)
