@@ -1,49 +1,42 @@
 # Stellar Network Demo: Smart Wallets with Game-Changer Dev Tools
 
-This demo repo demonstrates the basics of how to get started with building on
-the [Stellar Network](https://developers.stellar.org/) smart wallets and transaction workflows powered by Stellar's
-innovative tools like the **Stellar CLI**, the **Stellar Javascript SDK**, **Passkey Kit** and **Launchtube**. all
-integrated with **Astro** and **Svelte**.
-These tools aim to simplify the development of Web3 applications by providing user-friendly features and fine-grained
-transaction management.
+This repo demonstrates the basics of getting started building on the [Stellar Network](https://developers.stellar.org/) 
+with [smart wallets](https://developers.stellar.org/docs/build/apps/smart-wallets) and transaction workflows powered 
+by Stellar dev tools like the **Stellar CLI**, the **Stellar Javascript SDK**, **Passkey Kit** and **Launchtube**. 
 
-## ✨ Features
+With **Astro** and **Svelte** on the front-end
 
-- Integration with **Passkey Kit** for seamless biometric authentication
-- **Launchtube** for abstracting transaction lifecycle management and paymaster functionality
-- Deployment-ready environment with **ZettaBlock Indexer** and TypeScript bindings generated with the Stellar CLI.
-- Alternative indexers(Not currently supported):
-    - [Subquery](https://subquery.network/)
-    - [Goldsky](https://goldsky.com/)
-    - [The Graph](https://thegraph.com/)
+**📚 Highlighted Tools**
+- [Stellar CLI](https://developers.stellar.org/docs/tools/cli/install-cli)
+    - [Generating Bindings](https://developers.stellar.org/docs/tools/cli/stellar-cli#stellar-contract-bindings)
+- [Stellar Javascript SDK](https://developers.stellar.org/docs/tools/sdks/client-sdks#javascript-sdk)
+    - [Stellar RPC Server](https://stellar.github.io/js-stellar-sdk/module-rpc.Server.html)
+- [Passkey Kit](https://github.com/kalepail/passkey-kit)
+- [Launchtube](https://github.com/stellar/launchtube)
+- [Zettablock GraphQL](https://docs.zettablock.com/reference/custom-api-call)
+
+**✨ Features**
+- **Passkey Kit** for seamless biometric authentication
+- **Launchtube** for transaction lifecycle management and paymaster functionality
+- GraphQL event data with **Zettablock** 
+- [TypeScript bindings generated with the Stellar CLI](https://developers.stellar.org/docs/tools/cli/stellar-cli#stellar-contract-bindings-typescript)
 
 ---
-
-## 📚 Highlighted Tools
 
 ### Passkey Kit: Simplifying UX in Web3
 
 [Passkey Kit GitHub Repository](https://github.com/kalepail/passkey-kit)
 
-Self-custody is just too complicated for the majority of users and is not neccesary for many use-cases. This greatly
-impacts adoption and also diminishes security ecosystem wide b/c the demands of operational security are just too high
-for most folx.
+Self-custody is too complicated for users.
 
-**Passkey Kit** streamlines user experience (UX) in Web3 by introducing biometric authentication for signing and
-fine-grained authorization of Stellar blockchain transactions. Using [WebAuthn](https://webauthn.io/) standards, Passkey
-Kit removes the complexity of self-custodied private key management, making it possible for developers to implement:
+**Passkey Kit** streamlines user experience (UX) in Web3 by leveraging biometric authentication for signing and
+fine-grained authorization of Stellar transactions with [Policy Signers](https://github.com/kalepail/passkey-kit/tree/next/contracts/sample-policy). 
+Implementing [WebAuthn](https://webauthn. io/) standards, Passkey Kit removes the complexity of Web3 on-boarding.
 
-1. **Passwordless Login**: Enhanced security and streamlined user onboarding. No more magic link emails, OTPs, or
-   boilerplate registration forms
-2. **Biometric Signing**: Enables users to apply fine-grained authorization policies to the act of signing Stellar
-   network transactions or actions using their device's biometric or password management software.
-3. **Fine-Grained Authorization**: Users can assign precise permissions to transaction signing credentials, enabling
-   modular and controlled access.
-4. **Seamless UX**: With Passkey Kit, developers can provide authentication methods familiar to Web2 users, bridging the
-   gap between Web2 and Web3.
-
-Passkey Kit ushers in a new era for Stellar applications by combining biometric security with intuitive UX, opening the
-doors for mass adoption.
+1. **Passwordless Login**: Streamlined onboarding. No more magic link emails, OTPs, or registration forms
+2. **Biometric Signing**: Users can use their device's biometric authentication or password management software
+3. **Fine-Grained Authorization**: Configured fine-grained transaction signing credentials with modular access
+4. **Seamless UX**: Provide a familar login flow
 
 ---
 
@@ -51,37 +44,33 @@ doors for mass adoption.
 
 [Launchtube GitHub Repository](https://github.com/stellar/launchtube)
 
-Launchtube is a super cool service provided free-of-charge(currently) by Stellar that abstracts away the complexities of
-managing transactions on Stellar. It provides multiple layers of utility.
+Launchtube is a super cool service that abstracts away the complexity of submitting transactions.
 
-Blockchain transactions are very nuanced and complex in many cases. Especially when talking about making smart contract
-invocations on Stellar. Determining the footprint of an operation, thinking about different types of storage durability
-and TTLs, managing the XDR binary data format complexity, polling rpc servers for transaction status, considering
-resource fees, managing ledger keys, auth and signers.
+**Smart Contract Development is Complex:**
+- Determining the footprint of an operation
+- Different [types of storage durability](https://developers.stellar.org/docs/build/guides/storage/choosing-the-right-storage)
+- [TTLs](https://developers.stellar.org/docs/learn/encyclopedia/storage/state-archival#ttl)
+- Managing [XDR binary data](https://developers.stellar.org/docs/learn/encyclopedia/data-format/xdr)
+- Considering [resource fees](https://developers.stellar.org/docs/networks/resource-limits-fees)
+- Transaction building, simulation, assembly and validation
 
-Launchtube handles all that for you!
+Let Launchtube handle getting your operations on-chain!
 
-1. **Transaction Lifecycle Management**: Launchtube handles the intricate processes involved in:
-    - Transaction building, simulation, assembly, validation, and submission
-    - Fee estimation, fee bumps, and even pays the resource fees for your transaction functioning as a Paymaster service
-      available as a public good!
+1. **Transaction Lifecycle Management**:
+    - Transaction Submission
+    - Retries
+    - Working around rate limits
 
-   This automation ensures developers can focus on building their application rather than managing the boilerplate of
-   Stellar protocol interactions.
+2. **Paymaster Service**:
+    - Subsidizes transaction fees
 
-2. **Paymaster Service**: One of Launchtube’s standout features is acting as a **paymaster**, simplifying gas fee
-   management:
-    - Subsidizes transaction fees for users including smart contract invocations
-    - Enhances and simplifies developer experience so they can focus on building their products
-
-Launchtube and Passkeys removes technical hurdles for Web3 developers, facilitating a faster path to launch for
-Stellar-powered dApps.
+Launchtube and Passkeys remove technical hurdles for Web3 developers!
 
 ---
 
-## 🚀 🛠 Commands to Get Started
+## 🚀 🛠 PNPM Commands
 
-All commands are run from the root directory of the project. Here's what you need to know:
+Run from the root directory of the project:
 
 | Command                    | Action                                       |
 |:---------------------------|:---------------------------------------------|
@@ -94,95 +83,60 @@ All commands are run from the root directory of the project. Here's what you nee
 
 ---
 
-## Smart Contract Deployment and Interaction
+## Stellar Smart Contract Chat Demo
 
-This demo includes a demo smart contract chat interface that provides a simplified example of secure, passkey-powered,
-message broadcasting in the cloud. The contract is super streamlined at the moment, persisting message content in
-emitted Soroban events upon invocting the contract's `send` function.
-Here’s how to get started:
+Example of secure, passkey-powered, chat message broadcasting. 
+Message content is persisted in emitted Soroban events upon invocation of the `send()` function
 
-### Build and Deploy the Smart Contract
+`contracts/chat-demo`
 
-Getting your local developer environment setup is the first step. Check out
-our [Getting Started guide here](https://developers.stellar.org/docs/build/smart-contracts/getting-started).
+### Build and Deploy your Smart Contract
 
-Check out our [docs](https://developers.stellar.org/) and jump into
-our [Discord server](https://discord.gg/stellardev) for more support.
+Getting your local environment setup is the first step
+
+Check out [Getting Started guide here](https://developers.stellar.org/docs/build/smart-contracts/getting-started).
+
+Vist our [Discord server](https://discord.gg/stellardev) for more support
 
 ## Deploy and Invoke Contract
 
-First, you need to deploy and invoke your contract. The example contract is a simple
-broadcast-based, verified messaging interface deployed as a smart contract on the Stellar Network that emits sent
-messages as contract events.
-
-Building the contract:
-
-```
+Building the contract with the Stellar CLI:
+```bash
 stellar contract build
 ```
 
 Deploy contract:
-
-```
+```bash
 stellar contract deploy \
     --wasm target/wasm32-unknown-unknown/release/chat_demo.wasm \
     --source alice \
     --network testnet
 ```
 
-## Reviewing the `send()` function on the chat-demo contract:
-
-First, let's take a moment to briefly chat about smart contract security.
-
-Spend some time and check out the following line in the contract, `contracts/chat-demo/src/lib.rs` line 10
-
-**internal::Env::require_auth**
-This amazing functionality is made possible by the Soroban Rust SDK, specifically
-the [Soroban Env Common crate](https://docs.rs/crate/soroban-env-common/latest)
-
-Check out the docs
-for [require_auth()](https://docs.rs/soroban-sdk/22.0.7/soroban_sdk/struct.Address.html#method.require_auth) to learn
-more!
-
+**Get your Contract ID:**
+```terminaloutput
+🔗 https://stellar.expert/explorer/testnet/contract/CBK6E4G3DCE3OR44ZYMKV36O35LMUIGH7LRV4GIUUMA5UDNWS57MAJN3
+✅ Deployed!
+CBK6E4G3DCE3OR44ZYMKV36O35LMUIGH7LRV4GIUUMA5UDNWS57MAJN3
 ```
+
+## Review the `send()` function in the chat-demo contract:
+
+Review line 10 in the contract, `contracts/chat-demo/src/lib.rs`:
+
+**soroban_sdk::address::require_auth**
+```rust
 addr.require_auth();
 ```
+- Ensures the `Address` has authorized the current invocation(including all the invocation arguments)
+- Provided by the Soroban Rust SDK(Specifically the [Soroban Env Common crate](https://docs.rs/crate/soroban-env-common/latest))
+- Sensible built-in security
 
-This ensures the `Address` has authorized the current invocation including all the invocation arguments. This works
-roughly similar to `require_auth_for_args`, but args are inferred from the current invocation.
-
-In this case, since only a single Address needs to authorize the invocation and there are no dynamic arguments that
-would need additional consideration, this simple solution works just fine!
-
-Addresses on Stellar are very versatile and can be used as parameter (e.g identify a payment recipient), as a
-`DataKey` (e.g. storing the balance), and as the authentication/authorization source.
-
-How can a single function be so powerful? If you really want to go down a rabbit hole, perform a `Recursive Expansion`on
-the `#[contractimpl]` (What's called
-a [Procedural attribute macro](https://doc.rust-lang.org/reference/procedural-macros.html#attribute-macros))
-which basically auto-magically generates a huge amount of boilerplate code for you through insanely clever engineering
-🤯.
-
-**TL;DR;**
-Basically, you will be able to get fairly sensible default security measures in-place without needing to be a Smart
-Contract security formal auditing maestro right out of the gate. But def take time to learn the nuances of smart
-contract security. These interfaces are public so security is paramount.
-
-**Very small snippet of some of the auto-magically generated Auth code:**
-
-```rust
-	pub fn send(&self, addr: &Address, msg: &String) -> () {
-		let old_auth_manager = self.env.in_contract().not().then(|| self.env.host().snapshot_auth_manager().unwrap());
-			if let Some(set_auths) = self.set_auths { self.env.set_auths(set_auths); }
-			if let Some(mock_auths) = self.mock_auths { self.env.mock_auths(mock_auths); }
-			if self.mock_all_auths { if self.allow_non_root_auth { self.env.mock_all_auths_allowing_non_root_auth(); } else { self.env.mock_all_auths(); } }
-	}
-```
+Auth on Stellar is powerful and gives you sensible security measures by default
 
 ## Invoking your Smart Contract
 
-Now let's walk through how to invoke your deployed contract using the Stellar CLI!
-
+Invoke your deployed contract `send()` function using the Stellar CLI:
 ```bash
 stellar contract invoke \
     --id CBUMOJAEAPLQUCWVIM6HJH5XKXW5OP7CRVOOYMJYSTZ6GFDNA72O2QW6 \
@@ -193,36 +147,30 @@ stellar contract invoke \
     --msg new-mesg-test2
 ```
 
-**Example diagnostic event:**
-When the send function is invoked, it emits an event onto the Stellar network with the following statement:
+**Example Diagnostic Event:**
+When the `send()` function is invoked, it emits an event onto the Stellar network:
 
-```
+```rust
 env.events().publish((addr.clone(),), msg.clone());
 ```
 
-The Stellar CLI is super smart so it automagically picks this up for you and displays it.
+The Stellar CLI picks this up for you and displays it.
 _ℹ️ Why does it look like a cat walked across my Keyboard after hitting the CAPS LOCK key?_
 
-```rust
+```terminaloutput
 contract_event: soroban_cli::log::event: 1: 
 AAAAAQAAAAAAAAABaMckBAPXCgrVQzx0n7dV7dc/4o1c7DE4lPPjFG0H9O0AAAABAAAAAAAAAAEAAAASAAAAAAAAAADElgmYaPOi19RkiYiykhX7tQjaBZ4Sw1wgNFLgIiDYUQAAAA4AAAAQdGVzdC1tc2ctdG8tc2VuZA== 
 ```
 
-This is [XDR](https://developers.stellar.org/docs/data/apis/horizon/api-reference/structure/xdr), the specially binary
-format used for externally representing data from the Stellar Network.
+This is [XDR](https://developers.stellar.org/docs/data/apis/horizon/api-reference/structure/xdr) 
+a binary data format
 
-It's very compact and great for machines to read, but not-so-great for human-readability. Check
-out [Stellar Lab](https://lab.stellar.org/xdr/view?$=network$id=testnet&label=Testnet&horizonUrl=https:////horizon-testnet.stellar.org&rpcUrl=https:////testnet.rpciege.com//&passphrase=Test%20SDF%20Network%20/;%20September%202015;)
-for help decoding XDR or the Stellar CLI to [decode XDR
-](https://developers.stellar.org/docs/tools/cli/stellar-cli#stellar-xdr-decode)
+**Help Decoding XDR:**
+- [Stellar Lab](https://lab.stellar.org/xdr/view?$=network$id=testnet&label=Testnet&horizonUrl=https:////horizon-testnet.stellar.org&rpcUrl=https:////testnet.rpciege.com//&passphrase=Test%20SDF%20Network%20/;%20September%202015;)
+- [Stellar CLI](https://developers.stellar.org/docs/tools/cli/stellar-cli#stellar-xdr-decode)
+- [rs-stellar-xdr](https://github.com/stellar/rs-stellar-xdr)
 
-You can also check out [rs-stellar-xdr](https://github.com/stellar/rs-stellar-xdr) for more robust XDR functionality.
-
-**Decoding XDR into JSON:**
-_Decoded XDR is much easier to read 😅_
-
-Here's an example of the diagnostic event emitted by the contract after we invoked it in much more readable JSON format:
-
+**XDR Decoded into JSON format:**
 ```json
 {
   "in_successful_contract_call": true,
@@ -246,14 +194,15 @@ Here's an example of the diagnostic event emitted by the contract after we invok
 }
 ```
 
-## Polling for Events using the CLI, cURL, or Stellar Lab
+## Polling for Events
 
-You can query an RPC endpoint with the Stellar CLI, a HTTP request(Axios or cURL), using the Javascript SDK, or
-using [Stellar Lab]
-(https://lab.stellar.org/)
+Make a Remote Procedure Call(RPC) with:
+- [Stellar CLI](https://github.com/stellar/stellar-cli)
+- An HTTP request (Axios or cURL)
+- Using the [Javascript SDK](https://stellar.github.io/js-stellar-sdk/)
+- Or using [Stellar Lab](https://lab.stellar.org/)
 
-Poll for events using a `cursor` parameter:
-
+**Poll for events using a `cursor` parameter with the Stellar CLI:**
 ```bash
 stellar events \
 	--network testnet \
@@ -262,9 +211,8 @@ stellar events \
     --output pretty
 ```
 
-Or using a `start-ledger` parameter:
-
-```
+**Using a `start-ledger` parameter:**
+```bash
 stellar events \
 	--network testnet \
     --start-ledger 589386 \
@@ -272,9 +220,8 @@ stellar events \
     --output pretty
 ```
 
-Example `cURL` call for making a `getEvents` RPC call on testnet:
-
-```bash
+**HTTP `cURL` making a `getEvents` RPC call on testnet:**
+```http request
 curl 'https://testnet.rpciege.com/' \
   -H 'accept: */*' \
   -H 'accept-language: en-US,en;q=0.9' \
@@ -282,14 +229,11 @@ curl 'https://testnet.rpciege.com/' \
   -H 'origin: https://lab.stellar.org' \
   --data-raw '{"jsonrpc":"2.0","id":8675309,"method":"getEvents","params":{"xdrFormat":"base64","startLedger":589386,"pagination":{"limit":10},"filters":[{"type":"contract","contractIds":["CBUMOJAEAPLQUCWVIM6HJH5XKXW5OP7CRVOOYMJYSTZ6GFDNA72O2QW6"],"topics":[]}]}}'
 ```
+[Stellar lab getEvents request](https://lab.stellar.org/endpoints/rpc/get-events?$=network$id=testnet&label=Testnet&horizonUrl=https:////horizon-testnet.stellar.org&rpcUrl=https:////testnet.rpciege.com//&passphrase=Test%20SDF%20Network%20/;%20September%202015;&endpoints$params$startLedger=589386&limit=10&filters=%7B%22type%22:%22contract%22,%22contract_ids%22:%5B%22CBUMOJAEAPLQUCWVIM6HJH5XKXW5OP7CRVOOYMJYSTZ6GFDNA72O2QW6%22%5D,%22topics%22:%5B%22%22%5D%7D)
 
-Link to [Stellar lab with a prepopulated getEvents request]
-(https://lab.stellar.org/endpoints/rpc/get-events?$=network$id=testnet&label=Testnet&horizonUrl=https:////horizon-testnet.stellar.org&rpcUrl=https:////testnet.rpciege.com//&passphrase=Test%20SDF%20Network%20/;%20September%202015;&endpoints$params$startLedger=589386&limit=10&filters=%7B%22type%22:%22contract%22,%22contract_ids%22:%5B%22CBUMOJAEAPLQUCWVIM6HJH5XKXW5OP7CRVOOYMJYSTZ6GFDNA72O2QW6%22%5D,%22topics%22:%5B%22%22%5D%7D;;)
+### `getEvents` RPC Response
 
-### Example Response from `getEvents` RPC call
-
-Example JSON response for Get Events RPC Call:
-
+JSON response for [Get Events RPC Call](https://developers.stellar.org/docs/data/apis/rpc/api-reference/methods/getEvents):
 ```json
 {
   "jsonrpc": "2.0",
@@ -319,62 +263,40 @@ Example JSON response for Get Events RPC Call:
 
 **Topic Field: `ScVal` representing the Address:**
 Path:  `result.events.topic`
-
-The topic XDR:
-
-```
+```terminaloutput
 AAAAEgAAAAAAAAAAxJYJmGjzotfUZImIspIV+7UI2gWeEsNcIDRS4CIg2FE=
 ```
 
-A `ScVal` type in JSON format representing an Address:
-
+**Decoded Event Topic: `ScVal` JSON representing an Address:**
 ```json
 {
   "address": "GDCJMCMYNDZ2FV6UMSEYRMUSCX53KCG2AWPBFQ24EA2FFYBCEDMFCBCV"
 }
 ```
 
-**Value Field: `ScVal` representing the message payload:**
+**XDR Value Field: `ScVal` representing the message payload:**
 Path:  `result.events.value`
-
-Here is an example of the XDR that represents the `value` field:
-
-```
+```terminaloutput
 AAAADgAAABB0ZXN0LW1zZy10by1zZW5k
 ```
-
-Here is a JSON representation of that XDR:
-
+**Decoded JSON:**
 ```json
 {
   "string": "test-msg-to-send"
 }
 ```
 
-## 👀 Want to learn more?
+## RpcServer
+Path:  `src/utils/rpc.ts`
 
-Feel free to check [our documentation](https://developers.stellar.org/) or jump into
-our [Discord server](https://discord.gg/stellardev).
+`rpc.ts` provides an interface for calling a Stellar RPC server. 
+We will use it to retrieve and process emitted contract events.
+It uses the [Stellar Javascript SDK](https://stellar.github.io/js-stellar-sdk/)
 
-Now let's take a look at some of the other code in this repo.
-
-## LocalRpcServer
-
-Path:  `src/utils/local-rpc-server.ts`
-
-The `LocalRpcServer` class provides a robust interface for interacting with Stellar's RPC server to retrieve and process
-contract events from the Soroban blockchain. It handles the complexities of RPC communication, event filtering, data
-validation, and transformation.
-
-### Functionality
-
-- **Contract Event Retrieval**: Fetches contract events from the Stellar network using using a RpcServer built with
-  the [Stellar Javascript SDK](https://stellar.github.io/js-stellar-sdk/)
-- **Event Filtering**: Filters events by contract ID, topic and validates data integrity
-- **Event Transformation**: Converts raw `Api.GetEventsResponse` responses into structured `ChatEvent` objects using a
-  builder pattern with built-in validation and error-handling via
-  the [chat-event-builder.ts](src/utils/chat-event-builder.ts) class.
-- **Deduplication**: Ensures each event is processed only once through in-memory ID uniqueness
+**Contract Event Retrieval**:
+-  Fetches contract events 
+- Filters events by contract ID, topic and validates data integrity
+- Converts `Api.GetEventsResponse`s into structured `ChatEvent` objects for the front-end
 
 ### Configuration Options
 
@@ -394,17 +316,6 @@ Additionally, the class uses these internal configuration values:
     - `PUBLIC_CHAT_CONTRACT_ID`: The default contract ID to filter events
     - `PUBLIC_START_LEDGER`: The default starting ledger number
 
-### How It Works
-
-1. **Initialization**: The server is initialized with configuration options from your `.env` file
-2. **RPC Communication**: Interacts with the Stellar network through the `@stellar/stellar-sdk`
-3. **Event Processing Pipeline**:
-    - Retrieves events using the RpcServer `getEvents` rpc call with appropriate filters
-    - Validates that all required event data is present
-    - Filters out duplicates using the in-memory id tracking
-    - Transforms validated events into structured `ChatEvent` objects using the `ChatEventBuilder` class
-    - Returns an array of processed events
-
 ## Usage Example
 
 Let's walk through an example watching how data goes from the RpcServer to your UI.
@@ -412,10 +323,10 @@ Let's walk through an example watching how data goes from the RpcServer to your 
 ### Front-end
 
 Check out the following file:
-`src/components/ChatEventMsg.svelte`
+`src/components/Welcome.svelte`
 
-This component requests emitted events from a rpc server and the prints out the resulting chat messages emitted in the
-events.
+This component requests emitted events from a rpc server and the prints out the resulting chat messages 
+emitted in the events
 
 ```typescript
     async function callGetEvents () {
@@ -490,7 +401,7 @@ async function getFilteredEventsForContract (cursor: string): Promise<ChatEvent[
 }
 ```
 
-Next let's take a look at the request handler.
+Next, let's take a look at the request handler.
 
 ```typescript
     function successfulRequestEventHandler (eventResponse: Api.GetEventsResponse): ChatEvent[] {
@@ -508,3 +419,38 @@ Next let's take a look at the request handler.
 ```
 
 This function takes a response from the rpc server and performs various validations, filtering and transformations to extract the data we need on the front-end!
+
+---
+
+## 👀 Want to learn more?
+
+Feel free to check [our documentation](https://developers.stellar.org/) or jump into
+our [Discord server](https://discord.gg/stellardev).
+
+Now let's take a look at some of the other code in this repo.
+
+---
+
+#### Addendum: How Auth code in your contract is generated with `require_auth`
+
+If you perform a `Recursive Expansion`on
+the `#[contractimpl]` a [Procedural attribute macro](https://doc.rust-lang.org/reference/procedural-macros.html#attribute-macros)) generates the code for you
+
+```rust
+	pub fn send(&self, addr: &Address, msg: &String) -> () {
+		let old_auth_manager = self.env.in_contract().not().then(|| self.env.host().snapshot_auth_manager().unwrap());
+			if let Some(set_auths) = self.set_auths { self.env.set_auths(set_auths); }
+			if let Some(mock_auths) = self.mock_auths { self.env.mock_auths(mock_auths); }
+			if self.mock_all_auths { if self.allow_non_root_auth { self.env.mock_all_auths_allowing_non_root_auth(); } else { self.env.mock_all_auths(); } }
+	}
+```
+Learn more [require_auth()](https://docs.rs/soroban-sdk/22.0.7/soroban_sdk/struct.Address.html#method.require_auth)
+
+---
+
+**Alternative indexers(Not currently supported):**
+- [Subquery](https://subquery.network/)
+- [Goldsky](https://goldsky.com/)
+- [The Graph](https://thegraph.com/)
+
+
