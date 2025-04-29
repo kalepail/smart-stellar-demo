@@ -55,9 +55,7 @@ Launchtube is a super cool service that abstracts away the complexity of submitt
 
 - Determining the footprint of an operation
 -
-
 Different [types of storage durability](https://developers.stellar.org/docs/build/guides/storage/choosing-the-right-storage)
-
 - [TTLs](https://developers.stellar.org/docs/learn/encyclopedia/storage/state-archival#ttl)
 - Managing [XDR binary data](https://developers.stellar.org/docs/learn/encyclopedia/data-format/xdr)
 - Considering [resource fees](https://developers.stellar.org/docs/networks/resource-limits-fees)
@@ -78,6 +76,7 @@ _Let Launchtube handle getting your operations on-chain!_
 ## Stellar Smart Contract Chat Demo
 
 Secure, passkey-powered, chat message broadcasting.
+
 Message content is persisted in emitted Soroban events upon invocation of the `send()` function.
 Path: `contracts/chat-demo`
 
@@ -224,7 +223,7 @@ stellar events \
 
 **HTTP `cURL` making a `getEvents` RPC call on testnet:**
 
-```http request
+```bash
 curl 'https://testnet.rpciege.com/' \
   -H 'accept: */*' \
   -H 'accept-language: en-US,en;q=0.9' \
@@ -329,18 +328,17 @@ await rpc.getEvents()
 - Set `startLedger` or `cursor` and `limit`
 
 ```typescript
-    await rpc
-    .getEvents({
-        filters: [
-            {
-                type: "contract",
-                contractIds: [import.meta.env.PUBLIC_CHAT_CONTRACT_ID],
-            },
-        ],
-        startLedger: typeof limit === "number" ? limit : undefined,
-        limit: 10_000,
-        cursor: typeof limit === "string" ? limit : undefined,
-    })
+await rpc.getEvents({
+    filters: [
+        {
+            type: "contract",
+            contractIds: [import.meta.env.PUBLIC_CHAT_CONTRACT_ID],
+        },
+    ],
+    startLedger: typeof limit === "number" ? limit : undefined,
+    limit: 10_000,
+    cursor: typeof limit === "string" ? limit : undefined,
+})
 ```
 
 **Convert from GetEvent API Response to Chat Event Object:**
@@ -387,7 +385,7 @@ events.forEach((event) => {
 	- msg as `string`
 
 ```typescript
-        msgs.push({
+msgs.push({
     id: event.id,
     addr,
     timestamp: new Date(event.ledgerClosedAt),
@@ -438,7 +436,7 @@ This component prints out the chat messages from emitted events:
 - Sort by Timestamp
 
 ```typescript
-    async function callGetEvents(
+async function callGetEvents(
     limit: number | string,
     found: boolean = false,
 ) {
@@ -446,7 +444,6 @@ This component prints out the chat messages from emitted events:
     msgs = msgs.sort(
         (a, b) => a.timestamp.getTime() - b.timestamp.getTime(),
     );
-}
 }
 ```
 
@@ -509,28 +506,6 @@ async function send() {
 
 Feel free to check [our documentation](https://developers.stellar.org/) or jump into
 our [Discord server](https://discord.gg/stellardev).
-
-Now let's take a look at some of the other code in this repo.
-
----
-
-#### Addendum: How Auth code in your contract is generated with `require_auth`
-
-If you perform a `Recursive Expansion`on
-the `#[contractimpl]`
-a [Procedural attribute macro](https://doc.rust-lang.org/reference/procedural-macros.html#attribute-macros)) generates
-the code for you
-
-```rust
-    pub fn send(&self, addr: &Address, msg: &String) -> () {
-	let old_auth_manager = self.env.in_contract().not().then(|| self.env.host().snapshot_auth_manager().unwrap());
-	if let Some(set_auths) = self.set_auths { self.env.set_auths(set_auths); }
-	if let Some(mock_auths) = self.mock_auths { self.env.mock_auths(mock_auths); }
-	if self.mock_all_auths { if self.allow_non_root_auth { self.env.mock_all_auths_allowing_non_root_auth(); } else { self.env.mock_all_auths(); } }
-}
-```
-
-Learn more [require_auth()](https://docs.rs/soroban-sdk/22.0.7/soroban_sdk/struct.Address.html#method.require_auth)
 
 ---
 
