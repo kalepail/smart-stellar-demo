@@ -1,4 +1,4 @@
-# Stellar Network Demo: Passkey-powered On-chain Chat
+# Stellar Network Demo: Passkey-powered Onchain Chat
 
 Get started building on the [Stellar Network](https://developers.stellar.org/)
 with [smart wallets](https://developers.stellar.org/docs/build/apps/smart-wallets) powered by Stellar dev tools
@@ -14,22 +14,20 @@ With **Astro** and **Svelte** on the front-end.
 	- [Stellar RPC Server](https://stellar.github.io/js-stellar-sdk/module-rpc.Server.html)
 - [Passkey Kit](https://github.com/kalepail/passkey-kit)
 - [Launchtube](https://github.com/stellar/launchtube)
-- [Zettablock GraphQL](https://docs.zettablock.com/reference/custom-api-call)
+- [Zettablock Indexer](https://docs.zettablock.com/reference/custom-api-call)
 
 **✨ Features**
 
 - **Passkey Kit** for seamless biometric authentication
 - **Launchtube** for transaction lifecycle management and paymaster functionality
-- GraphQL event data with **Zettablock**
+- **Zettablock** for indexing event data
 - [TypeScript bindings](https://developers.stellar.org/docs/tools/cli/stellar-cli#stellar-contract-bindings-typescript) generated with the Stellar CLI
-
----
 
 ### Passkey Kit: Simplifying UX in Web3
 
 [Passkey Kit GitHub Repository](https://github.com/kalepail/passkey-kit)
 
-Self-custody is too complicated for users.
+Self-custody can be complicated for users.
 
 **Passkey Kit** streamlines user experience (UX) in Web3 by leveraging biometric authentication for signing and
 fine-grained authorization of Stellar transactions
@@ -41,8 +39,6 @@ Implementing [WebAuthn](https://webauthn.io/) standards, Passkey Kit removes the
 2. **Biometric Signing**: Users can use their device's biometric authentication or password managers
 3. **Fine-Grained Authorization**: Configured fine-grained transaction signing credentials with modular access
 4. **Seamless UX**: Provide familiar login flow
-
----
 
 ### Launchtube: Managing the Transaction Lifecycle
 
@@ -59,7 +55,7 @@ Launchtube is a super cool service that abstracts away the complexity of submitt
 - Considering [resource fees](https://developers.stellar.org/docs/networks/resource-limits-fees)
 - Transaction building, simulation, assembly and validation
 
-_Let Launchtube handle getting your operations on-chain!_
+_Let Launchtube handle getting your operations onchain!_
 
 1. **Transaction Lifecycle Management**:
 	- Transaction Submission
@@ -68,8 +64,6 @@ _Let Launchtube handle getting your operations on-chain!_
 
 2. **Paymaster Service**:
 	- Subsidizes transaction fees
-
----
 
 ## Stellar Smart Contract Chat Demo
 
@@ -105,7 +99,7 @@ stellar contract deploy \
 
 **Get your Contract ID:**
 
-```terminaloutput
+```bash
 🔗 https://stellar.expert/explorer/testnet/contract/CBK6E4G3DCE3OR44ZYMKV36O35LMUIGH7LRV4GIUUMA5UDNWS57MAJN3
 ✅ Deployed!
 CBK6E4G3DCE3OR44ZYMKV36O35LMUIGH7LRV4GIUUMA5UDNWS57MAJN3
@@ -422,8 +416,6 @@ Run from the root directory of the project:
 | `pnpm run astro ...`       | Run Astro CLI commands like `astro add`      |
 | `pnpm run astro -- --help` | Get help using the Astro CLI                 |
 
----
-
 Review the following file:
 `src/components/Welcome.svelte`
 
@@ -455,8 +447,7 @@ Updating the UI in responses to changes in the state.
 - https://svelte.dev/docs/svelte/each
 - Print out `ChatEvent` fields embedded in styled HTML
 
-```sveltehtml
-
+```html
 {#each msgs as event}
     <li class="mb-2"><span class="text-mono text-sm bg-black rounded-t-lg text-white px-3 py-1">
 	    <a class="underline"
@@ -487,7 +478,6 @@ Updating the UI in responses to changes in the state.
 
 ```typescript
 async function send() {
-
     let at = await chat.send({
         addr: $contractId,
         msg,
@@ -498,16 +488,12 @@ async function send() {
 }
 ```
 
----
-
 ## 👀 Want to learn more?
 
 Feel free to check [our documentation](https://developers.stellar.org/) or jump into
 our [Discord server](https://discord.gg/stellardev).
 
----
-
-**Alternative indexers(Not currently supported):**
+## Alternative indexers
 
 - [Subquery](https://subquery.network/)
 - [Goldsky](https://goldsky.com/)
